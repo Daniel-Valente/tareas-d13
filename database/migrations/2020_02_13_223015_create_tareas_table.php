@@ -15,15 +15,15 @@ class CreateTareasTable extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('categoria_id'); //$table->bigInteger('categoria_id')->unsigned();
-            $table->unsignedBigInteger('user_id');
-            $table->string('nombre_tarea');
-            $table->date('fecha_inicio');
-            $table->date('fecha_termino');
+            $table->unsignedBigInteger('categoria_id')->nullable()->default(null); //$table->bigInteger('categoria_id')->unsigned();
+            $table->unsignedBigInteger('user_id')->nullable()->default(null);
+            $table->string('nombre_Tarea');
+            $table->date('fecha_Inicio');
+            $table->date('fecha_Fin');
             $table->text('descripcion');
             $table->smallInteger('prioridad')->unsigned();
-            $table->string('estatus');
-            $table->boolean('terminada');
+            $table->string('estatus')->default('Por Hacer');
+            $table->boolean('terminada')->default(0);
             $table->timestamps();
         });
     }
