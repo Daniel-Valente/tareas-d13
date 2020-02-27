@@ -7,34 +7,38 @@
             <div class="card">
                 <div class="card-header">Captura de nueva tarea</div>
                 <div class="card-body">
-                    <form action="{{ action('TareaController@store') }}" method="POST"><!--Cualquier formulario con POST tiene que ir con @ csrf -->
-                        @csrf <!--{ { route('tarea.store') } }-->
+                    @isset($tarea)
+                        <form action="{{ route('tarea.update', $tarea->id ) }}"  method="POST">
+                            @method('PATCH')
+                    @else
+                        <form action="{{ route('tarea.store') }}" method="POST"><!--Cualquier formulario con POST tiene que ir con @ csrf action('TareaController@store')-->
+                    @endisset ()
+                    @csrf <!--{ { route('tarea.store') } }-->
                             <div class="form-group">
                                 <label for="nombre_Tarea">Nombre Tarea</label>
-                                <input type="text" class="form-control" id="nombre_Tarea" name="nombre_Tarea">
+                                <input type="text" class="form-control" id="nombre_Tarea" name="nombre_Tarea" value="{{ $tarea->nombre_Tarea ?? '' }}">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Inicio">Fecha Inicio</label>
-                                    <input type="date" class="form-control" name="fecha_Inicio">
+                                    <input type="date" class="form-control" name="fecha_Inicio" value="{{ $tarea->fecha_Inicio ?? '' }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Fin">Fecha Término</label>
-                                    <input type="date" class="form-control" name="fecha_Fin">
+                                    <input type="date" class="form-control" name="fecha_Fin" value="{{ $tarea->fecha_Fin ?? '' }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control" name="descripcion"></textarea>
+                                <textarea class="form-control" name="descripcion">{{ $tarea->descripcion ?? '' }}</textarea>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="prioridad">Prioridad</label>
                                     <select name="prioridad" class="form-control">
-                                        <option selected disabled value="">...</option>
-                                        <option value="1">Baja  [1]</option>
-                                        <option value="2">Media [2]</option>
-                                        <option value="3">Alta  [3]</option>
+                                        <option value="1" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : '' }} >Baja  [1]</option>
+                                        <option value="2" {{ isset($tarea) && $tarea->prioridad == 2 ? 'selected' : '' }} >Media [2]</option>
+                                        <option value="3" {{ isset($tarea) && $tarea->prioridad == 3 ? 'selected' : '' }} >Alta  [3]</option>
                                     </select>
                                 </div>
                                 <!--<div class="form-group col-md-6">
@@ -47,7 +51,7 @@
                                     </select>
                                 </div>-->
                             </div>
-                            <button type="submit" class="btn btn-primary">Crear Tarea</button>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
                       </form>
                 </div>
             </div>

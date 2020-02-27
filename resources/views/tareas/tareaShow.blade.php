@@ -1,0 +1,37 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Vista de Tarea</div>
+
+                <div class="card-body">
+                    <a href="{{ route('tarea.edit', $tarea->id ) }}" class="btn btn-success btn-sm">Editar</a>
+
+                    <hr>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarea</th>
+                            <th>Descripción</th>
+                            <th>Prioridad</th>
+                            <th>Inicio</th>
+                            <th>Término</th>
+                        </tr>
+                        <tr>
+                            <td>{{ $tarea->id }}</td>
+                            <td>{{ $tarea->nombre_Tarea }}</td>
+                            <td>{{ $tarea->descripcion }}</td>
+                            <td>{{ $tarea->prioridad }}</td>
+                            <td>{{ $tarea->fecha_Inicio }}</td>
+                            <td>{{ $tarea->fecha_Fin }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

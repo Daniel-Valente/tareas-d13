@@ -19,7 +19,11 @@
                         @foreach ($tareas as $tarea)
                             <tr>
                                 <td>{{ $tarea->id }}</td>
-                                <td>{{ $tarea->nombre_Tarea }}</td>
+                                <td>
+                                    <a href=" {{ route('tarea.show', $tarea->id) }} ">
+                                        {{ $tarea->nombre_Tarea }}
+                                    </a>
+                                </td>
                                 <td>{{ $tarea->descripcion }}</td>
                             </tr>
                         @endforeach
