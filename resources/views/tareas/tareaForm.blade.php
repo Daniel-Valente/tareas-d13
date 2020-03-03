@@ -7,52 +7,47 @@
             <div class="card">
                 <div class="card-header">Captura de nueva tarea</div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     @isset($tarea)
-                        <form action="{{ route('tarea.update', $tarea->id ) }}"  method="POST">
-                            @method('PATCH')
+                        {!! Form::model($tarea, ['route' => ['tarea.update', $tarea->id], 'method' => 'PATCH']) !!}
                     @else
-                        <form action="{{ route('tarea.store') }}" method="POST"><!--Cualquier formulario con POST tiene que ir con @ csrf action('TareaController@store')-->
+                        {!! Form::open(['route' => 'tarea.store']) !!}
                     @endisset ()
-                    @csrf <!--{ { route('tarea.store') } }-->
                             <div class="form-group">
-                                <label for="nombre_Tarea">Nombre Tarea</label>
-                                <input type="text" class="form-control" id="nombre_Tarea" name="nombre_Tarea" value="{{ $tarea->nombre_Tarea ?? '' }}">
+                                {!! Form::label('nombre_Tarea', 'Tarea') !!}
+                                {!! Form::text('nombre_Tarea', null, ['class' => 'form-control', 'id' => 'nombre_Tarea']) !!}
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Inicio">Fecha Inicio</label>
-                                    <input type="date" class="form-control" name="fecha_Inicio" value="{{ $tarea->fecha_Inicio ?? '' }}">
+                                    {!! Form::date('fecha_Inicio', null, ['class' => 'form-control'])!!}
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Fin">Fecha Término</label>
-                                    <input type="date" class="form-control" name="fecha_Fin" value="{{ $tarea->fecha_Fin ?? '' }}">
+                                    {!! Form::date('fecha_Fin', null, ['class' => 'form-control'])!!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control" name="descripcion">{{ $tarea->descripcion ?? '' }}</textarea>
+                                {!! Form::textarea('descripcion', null, ['class' => 'form-control', 'row' => '3']) !!}
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="prioridad">Prioridad</label>
-                                    <select name="prioridad" class="form-control">
-                                        <option value="1" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : '' }} >Baja  [1]</option>
-                                        <option value="2" {{ isset($tarea) && $tarea->prioridad == 2 ? 'selected' : '' }} >Media [2]</option>
-                                        <option value="3" {{ isset($tarea) && $tarea->prioridad == 3 ? 'selected' : '' }} >Alta  [3]</option>
-                                    </select>
+                                    {!! Form::select('prioridad', ['1' => 'Baja', '2' => 'Media', '3' => 'Alta'], null, ['class' => 'forn-control']) !!}
                                 </div>
-                                <!--<div class="form-group col-md-6">
-                                    <label for="prioridad">Estatus</label>
-                                    <select name="estatus" class="form-control">
-                                        <option selected disabled value="">...</option>
-                                        <option value="Sin comenzar">Sin comenzar</option>
-                                        <option value="Comenzada">Comenzada</option>
-                                        <option value="Finalizada">Finalizada</option>
-                                    </select>
-                                </div>-->
                             </div>
                             <button type="submit" class="btn btn-primary">Aceptar</button>
-                      </form>
+                      {!! Form::close() !!}
                 </div>
             </div>
         </div>

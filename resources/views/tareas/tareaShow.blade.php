@@ -11,6 +11,12 @@
                     <a href="{{ route('tarea.edit', $tarea->id ) }}" class="btn btn-success btn-sm">Editar</a>
 
                     <hr>
+                    <form action="{{ route('tarea.destroy', $tarea->id ) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+
                     <table class="table">
                         <tr>
                             <th>ID</th>

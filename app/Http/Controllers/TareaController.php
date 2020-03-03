@@ -38,6 +38,14 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre_Tarea' => 'required|max:5',
+            'fecha_Inicio' => 'required|date',
+            'fecha_Fin' => 'required|date',
+            'descripcion' => 'required|min:20',
+            'prioridad' => 'required|int|min:1|max:3',
+        ]);
+
         $tarea = new Tarea();
         $tarea->nombre_Tarea = $request->nombre_Tarea;
         $tarea->fecha_Inicio = $request->fecha_Inicio;
@@ -80,6 +88,14 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
+        $request->validate([
+            'nombre_Tarea' => 'required|max:5',
+            'fecha_Inicio' => 'required|date',
+            'fecha_Fin' => 'required|date',
+            'descripcion' => 'required|min:20',
+            'prioridad' => 'required|int|min:1|max:3',
+        ]);
+
         $tarea->nombre_Tarea = $request->nombre_Tarea;
         $tarea->fecha_Inicio = $request->fecha_Inicio;
         $tarea->fecha_Fin = $request->fecha_Fin;
@@ -98,6 +114,7 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        //
+        $tarea->delete();
+        return redirect()->route('tarea.index');
     }
 }
