@@ -34,6 +34,12 @@
                             <td>{{ $tarea->fecha_Inicio }}</td>
                             <td>{{ $tarea->fecha_Fin }}</td>
                         </tr>
+                        <tr>
+                            <td colspan="6">
+                                Usuario: {{$tarea->user->name}} ({{$tarea->user->email}}) <br>
+                                Categoria: {{ $tarea->categoria->nombre_Categoria }}
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

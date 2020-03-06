@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
 use App\Tarea;
 use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +34,8 @@ class TareaController extends Controller
      */
     public function create()
     {
-        return view('tareas.tareaForm');
+        $categorias = Categoria::all()->pluck('nombre_Categoria', 'id');
+        return view('tareas.tareaForm', compact('categorias'));
     }
 
     /**
@@ -39,14 +47,16 @@ class TareaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_Tarea' => 'required|max:5',
+            'nombre_Tarea' => 'required|max:255',
             'fecha_Inicio' => 'required|date',
             'fecha_Fin' => 'required|date',
-            'descripcion' => 'required|min:20',
+            'descripcion' => 'required',
             'prioridad' => 'required|int|min:1|max:3',
         ]);
 
         $tarea = new Tarea();
+        $tarea->user_id = \Auth::id();
+        $tarea->categoria_id = $request->categoria_id;
         $tarea->nombre_Tarea = $request->nombre_Tarea;
         $tarea->fecha_Inicio = $request->fecha_Inicio;
         $tarea->fecha_Fin = $request->fecha_Fin;
@@ -76,7 +86,8 @@ class TareaController extends Controller
      */
     public function edit(Tarea $tarea)
     {
-        return view('tareas.tareaForm', compact('tarea'));
+        $categorias = Categoria::all()->pluck('nombre_Categoria', 'id');
+        return view('tareas.tareaForm', compact('tarea', 'categorias'));
     }
 
     /**
@@ -89,13 +100,14 @@ class TareaController extends Controller
     public function update(Request $request, Tarea $tarea)
     {
         $request->validate([
-            'nombre_Tarea' => 'required|max:5',
+            'nombre_Tarea' => 'required|max:255',
             'fecha_Inicio' => 'required|date',
             'fecha_Fin' => 'required|date',
-            'descripcion' => 'required|min:20',
+            'descripcion' => 'required',
             'prioridad' => 'required|int|min:1|max:3',
         ]);
 
+        $tarea->categoria_id = $request->categoria_id;
         $tarea->nombre_Tarea = $request->nombre_Tarea;
         $tarea->fecha_Inicio = $request->fecha_Inicio;
         $tarea->fecha_Fin = $request->fecha_Fin;

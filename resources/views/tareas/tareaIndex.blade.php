@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Lista de tareas</div>
 
@@ -15,6 +15,10 @@
                             <th>ID</th>
                             <th>Tarea</th>
                             <th>Descripción</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Termino</th>
+                            <th>Usuario</th>
+                            <th>Categoria</th>
                         </tr>
                         @foreach ($tareas as $tarea)
                             <tr>
@@ -25,6 +29,10 @@
                                     </a>
                                 </td>
                                 <td>{{ $tarea->descripcion }}</td>
+                                <td>{{ $tarea->fecha_Inicio->format('d/m/Y') }}</td>
+                                <td>{{ $tarea->fecha_Fin->format('d/m/Y') }}</td>
+                                <td>{{ $tarea->user->name }}</td>
+                                <td>{{ $tarea->categoria->nombre_Categoria }}</td>
                             </tr>
                         @endforeach
                     </table>

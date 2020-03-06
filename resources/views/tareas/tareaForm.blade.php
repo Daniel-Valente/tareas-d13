@@ -43,7 +43,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="prioridad">Prioridad</label>
-                                    {!! Form::select('prioridad', ['1' => 'Baja', '2' => 'Media', '3' => 'Alta'], null, ['class' => 'forn-control']) !!}
+                                    {!! Form::select('prioridad', [
+                                        '1' => 'Baja',
+                                        '2' => 'Media',
+                                        '3' => 'Alta'],
+                                        null, ['class' => 'forn-control']) !!}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="categoria">Categoria</label>
+                                    {!! Form::select('categoria_id', $categorias ,null, ['class' => 'forn-control']) !!}
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Aceptar</button>
