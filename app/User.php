@@ -37,8 +37,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tareas() {
+    public function tareas()
+    {
         return $this->hasMany(Tarea::class);
+    }
+
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipo::class);
     }
 }
 
