@@ -29,11 +29,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Inicio">Fecha Inicio</label>
-                                    {!! Form::date('fecha_Inicio', null, ['class' => 'form-control'])!!}
+                                    {!! Form::date('fecha_Inicio', isset($tarea) ? $tarea->fecha_Inicio->toDateString() : null, ['class' => 'form-control'])!!}
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="fecha_Fin">Fecha Término</label>
-                                    {!! Form::date('fecha_Fin', null, ['class' => 'form-control'])!!}
+                                    {!! Form::date('fecha_Fin', isset($tarea) ? $tarea->fecha_Inicio->toDateString() : null, ['class' => 'form-control'])!!}
                                 </div>
                             </div>
                             <div class="form-group">

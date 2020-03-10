@@ -31,8 +31,8 @@
                             <td>{{ $tarea->nombre_Tarea }}</td>
                             <td>{{ $tarea->descripcion }}</td>
                             <td>{{ $tarea->prioridad }}</td>
-                            <td>{{ $tarea->fecha_Inicio }}</td>
-                            <td>{{ $tarea->fecha_Fin }}</td>
+                            <td>{{ $tarea->fecha_Inicio->format('d/m/Y') }}</td>
+                            <td>{{ $tarea->fecha_Fin->format('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td colspan="6">

@@ -51,10 +51,14 @@ class TareaController extends Controller
             'fecha_Inicio' => 'required|date',
             'fecha_Fin' => 'required|date',
             'descripcion' => 'required',
-            'prioridad' => 'required|int|min:1|max:3',
+            'prioridad' => 'required|int|min:1|max:255',
         ]);
 
-        $tarea = new Tarea();
+        $request->merge(['user_id' => \Auth::id()]);
+        //dd($request->all());
+        Tarea::create($request->all());
+
+        /*$tarea = new Tarea();
         $tarea->user_id = \Auth::id();
         $tarea->categoria_id = $request->categoria_id;
         $tarea->nombre_Tarea = $request->nombre_Tarea;
@@ -62,7 +66,7 @@ class TareaController extends Controller
         $tarea->fecha_Fin = $request->fecha_Fin;
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
-        $tarea->save();
+        $tarea->save();*/
 
         return redirect()->route('tarea.index');
     }
@@ -107,13 +111,16 @@ class TareaController extends Controller
             'prioridad' => 'required|int|min:1|max:3',
         ]);
 
-        $tarea->categoria_id = $request->categoria_id;
+        Tarea::where('id', $tarea->id)
+            ->update($request->except('_token', '_method'));
+
+        /*$tarea->categoria_id = $request->categoria_id;
         $tarea->nombre_Tarea = $request->nombre_Tarea;
         $tarea->fecha_Inicio = $request->fecha_Inicio;
         $tarea->fecha_Fin = $request->fecha_Fin;
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
-        $tarea->save();
+        $tarea->save();*/
 
         return redirect()->route('tarea.show', $tarea->id);
     }

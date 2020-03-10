@@ -1,6 +1,6 @@
 <?php
 
-//use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use App\Categoria;
 use Illuminate\Database\Seeder;
 
@@ -13,9 +13,9 @@ class CategoriasTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('categorias')
+        DB::table('categorias')
             ->insert(['nombre_Categoria' => 'Personal']);
-        \DB::table('categorias')
+        DB::table('categorias')
             ->insert(['nombre_Categoria' => 'Escuela']);
 
         Categoria::create(['nombre_Categoria' => 'Trabajo']);
