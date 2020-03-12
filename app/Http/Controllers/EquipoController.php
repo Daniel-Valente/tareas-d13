@@ -76,7 +76,7 @@ class EquipoController extends Controller
         $equipo->save();
 
         //Relaciona Equipo con Usuarios
-        $equipo->users()->attach($request->user_id);
+        $equipo->users()->sync($request->user_id);
 
         return redirect()->route('equipo.index');
     }

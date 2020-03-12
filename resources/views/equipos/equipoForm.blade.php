@@ -27,9 +27,9 @@
                                 {!! Form::text('nombre_Equipo', null, ['class' => 'form-control', 'id' => 'nombre_Equipo']) !!}
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group">
                                     <label for="user_id">Integrantes</label>
-                                    {!! Form::select('user_id[]', $users ,null, ['class' => 'forn-control', 'multiple']) !!}
+                                    {!! Form::select('user_id[]', $users, isset($equipo) ? $equipo->users()->pluck('id') : null, ['class' => 'forn-control', 'multiple']) !!}
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Aceptar</button>
